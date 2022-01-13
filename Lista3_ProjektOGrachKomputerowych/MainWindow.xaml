@@ -1,0 +1,53 @@
+﻿<Window x:Class="Lista3_ProjektOGrachKomputerowych.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lista3_ProjektOGrachKomputerowych"
+        mc:Ignorable="d"
+        Title="Games Showcase" Height="450" Width="800">
+    <!--
+    StackPanel сортує об'єкти по порядку вписання їх до коду, в залежності від Oriental(по умолчанію вертикальна йде, зверху-в-низ)
+    Також можна задати щоб розположення об'єктів було не з ліва-на-право або зверху-вниз, а протилежно. FlowDirection="RightToLeft" / "DownToTop"
+    
+    
+    DockPanel гарно використовувати для створення інтерфейсів, коли наприклад потрібна якась менюшка зверху а в центрі чи де-інде якісь поля чи інформація.
+    <DockPanel LastChildFill="True/False"> lastchildfill відповідає за те чи останній об'єкт буде заповнювати все залишене пространство чи ні.
+    Також, послідовність доданих об'єктів грає роль в тому, який об'єкт займе більшу частину ефіру(пространства)
+    
+    
+    WrapPanel подібний до StackPanel, але якщо в ряд при горизонтальній орієнтації або в колону при вертикальній орієнтації не поміщаються всі об'єкти,
+    то WrapPanel створює новий ряд/колону і переносить ті об'єкти туди. Ще Є властивість з розмірами об'єктів, але то дуже дивно і не потрібно
+    <WrapPanel itemWidth/itemHeight = ""> та властивість встановлює для всіх об'єктів вказану ширину або висоту, вдобно
+    
+    
+    Canvas використовуєься тільки для того, щоб задати об'єкту відступ від однієї з чотирьох частин екрану
+    властивості: Canvas.Top="", Canvas.Left, Canvas.Right, Canvar.Bottom
+    -->
+    <Grid>
+        <TextBlock Text="Games Showcase" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontStyle="Italic" Height="50" Foreground="Firebrick">
+            <TextBlock.Effect>
+                <DropShadowEffect 
+                    ShadowDepth="3"
+                    Direction="55"
+                    Opacity="0.4"
+                    BlurRadius="2"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <DataGrid x:Name="dataGridGames" Width="400" Height="130" BorderBrush="Black" CanUserAddRows="False" ColumnWidth="*">
+          
+            <!-- як зробити першу колону меншою від остальних-->
+            
+        </DataGrid>
+        
+        <Canvas>
+           <Button Content="Add new game" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="10" Click="AddGame_Button"/>
+           <Button Content="Delete game" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="10" Click="DeleteGame_Button"/>
+           <Button Content="Save list" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Left="10" Click="SaveList_Button"/>
+           <Button Content="Load list" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Left="10" Click="LoadList_Button"/>
+            <Button Content="Change" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="125" Click="Change_Button"/>
+        </Canvas>
+        
+    </Grid>
+</Window>
