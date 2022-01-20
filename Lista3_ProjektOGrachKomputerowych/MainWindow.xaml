@@ -36,18 +36,19 @@
         </TextBlock>
 
         <DataGrid x:Name="dataGridGames" Width="400" Height="130" BorderBrush="Black" CanUserAddRows="False" ColumnWidth="*">
-          
-            <!-- як зробити першу колону меншою від остальних-->
-            
+
+
+
         </DataGrid>
-        
+
         <Canvas>
-           <Button Content="Add new game" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="10" Click="AddGame_Button"/>
-           <Button Content="Delete game" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="10" Click="DeleteGame_Button"/>
-           <Button Content="Save list" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Left="10" Click="SaveList_Button"/>
-           <Button Content="Load list" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Left="10" Click="LoadList_Button"/>
+            <Button Content="Add new game" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="10" Click="AddGame_Button"/>
+            <Button Content="Delete game" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="10" Click="DeleteGame_Button"/>
+            <Button Content="Save list" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Left="10" Click="SaveList_Button"/>
+            <Button Content="Load list" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Left="10" Click="LoadList_Button"/>
             <Button Content="Change" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="125" Click="Change_Button"/>
+            <Button Content="Refresh" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="125" Click="Refresh_button"/>
         </Canvas>
-        
+
     </Grid>
 </Window>

@@ -1,0 +1,21 @@
+﻿<Window x:Class="Lista3_ProjektOGrachKomputerowych.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lista3_ProjektOGrachKomputerowych"
+        mc:Ignorable="d"
+        Title="Log in" Height="319" Width="300" Background="DarkCyan">
+    <Border Background="#2e3137" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
+            <Label Content="Login" FontSize="25" Foreground="white" HorizontalAlignment="Center"/>
+            <Separator/>
+            <Label Content="Username" Foreground="white" FontSize="18"/>
+            <TextBox Name="usernameBox" Background="#545d6a" Foreground="White"/>
+            <Label Content="Password" Foreground="White" FontSize="18"/>
+            <PasswordBox Name="passwordBox" Background="#545d6a" Foreground="White"/>
+            <Button Name="submitButton" Click="Submit" Content="Submit" FontSize="18" Margin="20, 20" Background="#545d6a" Foreground="White"/>
+        </StackPanel>
+        <!-- https://youtu.be/72366X1-heg?t=540 -->
+    </Border>
+</Window>

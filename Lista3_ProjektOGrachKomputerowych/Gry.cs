@@ -11,7 +11,7 @@ namespace Lista3_ProjektOGrachKomputerowych
         public int releaseDate { get; set; }
         public string projectName { get; set; }
         public string companyName { get; set; }
-     
+
         public Gry()
         {
 

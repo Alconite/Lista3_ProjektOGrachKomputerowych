@@ -17,21 +17,47 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Data;
+
 
 namespace Lista3_ProjektOGrachKomputerowych
 {
-    
+
     public partial class MainWindow : Window
     {
         List<Gry> listaGier = new List<Gry>();
-        //private ObservableCollection<Gry> gierki;
 
         public MainWindow()
         {
             InitializeComponent();
-            listaGier.Add(new Gry(2015, "The Witcher 3: Wild Hunt", "CD Project Red"));
+
+
+            string connectionString = "Server= localhost\\SQLEXPRESS; Database= Gry; Integrated Security = SSPI";
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand command = new SqlCommand("DaneGier", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlDataAdapter sda = new SqlDataAdapter(command);
+            DataTable dataTable = new DataTable();
+            sda.Fill(dataTable);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Gry gry = new Gry();
+                gry.releaseDate = (int)row["Release_Date"];
+                gry.projectName = (string)row["Project_Name"];
+                gry.companyName = (string)row["Company_Name"];
+                listaGier.Add(gry);
+            }
+
+            /*listaGier.Add(new Gry(2015, "The Witcher 3: Wild Hunt", "CD Project Red"));
             listaGier.Add(new Gry(2013, "GTA 5", "Rockstar games"));
             listaGier.Add(new Gry(2014, "Hearthstone", "Blizzard Entertainment"));
+            listaGier.Add(new Gry(2015, "The Witcher 3: Wild Hunt", "CD Project Red"));
+            listaGier.Add(new Gry(2013, "GTA 5", "Rockstar games"));
+            listaGier.Add(new Gry(2014, "Hearthstone", "Blizzard Entertainment"));*/
             dataGridGames.ItemsSource = listaGier;
             /*DataGridColumn first = dataGridGames.Columns[0];
             first.Width = 10; */
@@ -62,7 +88,7 @@ namespace Lista3_ProjektOGrachKomputerowych
 
         private void DeleteGame_Button(object sender, RoutedEventArgs e)
         {
-            if(dataGridGames.SelectedItem != null)
+            if (dataGridGames.SelectedItem != null)
             {
                 int index = listaGier.IndexOf((Gry)dataGridGames.SelectedItem);
                 listaGier.RemoveAt(index);
@@ -73,7 +99,8 @@ namespace Lista3_ProjektOGrachKomputerowych
         private void SaveList_Button(object sender, RoutedEventArgs e)
         {
             XmlSerializer xs = new XmlSerializer(typeof(List<Gry>));
-            using (Stream s = File.Create("C:/Games + Programs/Studia/GameList.xml"))
+
+            using (Stream s = File.Create("C:/GameList.xml")) 
             {
                 xs.Serialize(s, listaGier);
             }
@@ -83,7 +110,8 @@ namespace Lista3_ProjektOGrachKomputerowych
         private void LoadList_Button(object sender, RoutedEventArgs e)
         {
             XmlSerializer xs = new XmlSerializer(typeof(List<Gry>));
-            using (Stream s = File.OpenRead("C:/Games + Programs/Studia/GameList.xml"))
+            //using (Stream s = File.OpenRead("C:/Games + Programs/Studia/GameList.xml"))
+            using (Stream s = File.OpenRead("C:/GameList.xml"))
             {
                 listaGier = (List<Gry>)xs.Deserialize(s);
             }
@@ -106,6 +134,11 @@ namespace Lista3_ProjektOGrachKomputerowych
                     dataGridGames.Items.Refresh();
                 }
             }
+        }
+
+        private void Refresh_button(object sender, RoutedEventArgs e)
+        {
+            dataGridGames.Items.Refresh();
         }
     }
 }
