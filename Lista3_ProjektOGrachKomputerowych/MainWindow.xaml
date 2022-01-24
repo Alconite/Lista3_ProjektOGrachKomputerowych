@@ -35,19 +35,28 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <DataGrid x:Name="dataGridGames" Width="400" Height="130" BorderBrush="Black" CanUserAddRows="False" ColumnWidth="*">
+        <!--DataGrid x:Name="dataGridGames" Width="400" Height="130" BorderBrush="Black" CanUserAddRows="False" ColumnWidth="*" Margin="382,69,10,220">
 
 
 
-        </DataGrid>
+        </-->
 
         <Canvas>
-            <Button Content="Add new game" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="10" Click="AddGame_Button"/>
-            <Button Content="Delete game" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="10" Click="DeleteGame_Button"/>
-            <Button Content="Save list" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Left="10" Click="SaveList_Button"/>
-            <Button Content="Load list" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Left="10" Click="LoadList_Button"/>
-            <Button Content="Change" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="125" Click="Change_Button"/>
+            <Button Name="add_button" Content="Add new game" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="10" Click="Button"/>
+            <Button Name="delete_button" Content="Delete game" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="10" Click="Button"/>
+            <Button Visibility="Hidden" Content="Save list" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Left="10" Click="SaveList_Button"/>
+            <Button Visibility="Hidden" Content="Load list" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Left="10" Click="LoadList_Button"/>
+            <Button Name="change_button" Content="Change" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="125" Click="Button"/>
             <Button Content="Refresh" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="125" Click="Refresh_button"/>
+            <ListView Name="dataGridGames" Grid.Row="1" Grid.Column="0" Canvas.Left="183" Canvas.Top="108">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Release Date" Width="100" DisplayMemberBinding="{Binding Release_Date}"/>
+                        <GridViewColumn Header="Project Name" Width="150" DisplayMemberBinding="{Binding Project_Name}" />
+                        <GridViewColumn Header="Company Name" Width="150" DisplayMemberBinding="{Binding Company_Name}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Canvas>
 
     </Grid>

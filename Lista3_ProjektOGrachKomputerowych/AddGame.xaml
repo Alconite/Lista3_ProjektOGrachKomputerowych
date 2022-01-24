@@ -9,14 +9,14 @@
     <Grid>
         <Canvas>
             <TextBlock Text="Insert information" FontSize="30" FontFamily="Comic Sans MS" FontStyle="Italic" Canvas.Left="250" Canvas.Top="30"/>
-            <TextBox x:Name="year" Width="70" Height="24" Canvas.Left="150" Canvas.Top="130" Text="{Binding releaseDate, Mode=TwoWay}" GotFocus="year_GotFocus"/>
-            <TextBox x:Name="project" Width="170" Height="24" Canvas.Left="250" Canvas.Top="130" Text="{Binding projectName, Mode=TwoWay}"/>
-            <TextBox x:Name="company" Width="170" Height="24" Canvas.Left="450" Canvas.Top="130" Text="{Binding companyName, Mode=TwoWay}"/>
+            <TextBox x:Name="year" Width="70" Height="24" Canvas.Left="150" Canvas.Top="130" Text="{Binding Release_Date, Mode=TwoWay}" GotFocus="year_GotFocus"/>
+            <TextBox x:Name="project" Width="170" Height="24" Canvas.Left="250" Canvas.Top="130" Text="{Binding Project_Name, Mode=TwoWay}"/>
+            <TextBox x:Name="company" Width="170" Height="24" Canvas.Left="450" Canvas.Top="130" Text="{Binding Company_Name, Mode=TwoWay}"/>
             <TextBlock Text="Year" FontSize="16" Canvas.Left="165" Canvas.Top="105"/>
             <TextBlock Text="Name of the game" FontSize="16" Canvas.Left="265" Canvas.Top="105"/>
             <TextBlock Text="Company name" FontSize="16" Canvas.Left="465" Canvas.Top="105"/>
-            <Button x:Name="Confirm_Button" Content="Confirm" Canvas.Bottom="80" Canvas.Right="30" Width="100" Height="30" Click="Confirm_Button_Click"/>
-            <Button x:Name="Cancel_Button" Content="Cancel" Canvas.Bottom="40" Canvas.Right="30" Width="100" Height="30" Click="Cancel_Button_Click"/>
+            <Button x:Name="Confirm_Button" Content="Confirm" Canvas.Bottom="80" Canvas.Right="30" Width="100" Height="30" Click="Button_Click"/>
+            <Button x:Name="Delete_Button" Content="Delete" Canvas.Bottom="40" Canvas.Right="30" Width="100" Height="30" Click="Button_Click"/>
             <Button x:Name="Picture_Button" Content="Add picture" Canvas.Bottom="0" Canvas.Right="30" Width="100" Height="30" Click="Picture_Click"/>
             <Image x:Name="Picture" Width="200" Height="220" Canvas.Bottom="30" Canvas.Left="280"/>
         </Canvas>

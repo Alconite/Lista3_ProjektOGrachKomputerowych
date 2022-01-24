@@ -9,8 +9,8 @@ namespace Lista3_ProjektOGrachKomputerowych
     public class Gry
     {
         public int releaseDate { get; set; }
-        public string projectName { get; set; }
-        public string companyName { get; set; }
+        public string xprojectName { get; set; }
+        public string xcompanyName { get; set; }
 
         public Gry()
         {
@@ -20,14 +20,14 @@ namespace Lista3_ProjektOGrachKomputerowych
         public Gry(Gry gry)
         {
             this.releaseDate = gry.releaseDate;
-            this.projectName = gry.projectName;
-            this.companyName = gry.companyName;
+            this.xprojectName = gry.xprojectName;
+            this.xcompanyName = gry.xcompanyName;
         }
         public Gry(int releaseDate, string projectName, string companyName)
         {
             this.releaseDate = releaseDate;
-            this.projectName = projectName;
-            this.companyName = companyName;
+            this.xprojectName = xprojectName;
+            this.xcompanyName = xcompanyName;
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Xml.Serialization;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Data;
+using Lista3_ProjektOGrachKomputerowych.model;
 
 
 namespace Lista3_ProjektOGrachKomputerowych
@@ -26,31 +27,37 @@ namespace Lista3_ProjektOGrachKomputerowych
 
     public partial class MainWindow : Window
     {
-        List<Gry> listaGier = new List<Gry>();
+        //List<Gry> listaGier = new List<Gry>();
+        public ObservableCollection<Game> gamelist { get; }
+        public Game gra { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+            DatabaseService DatabaseService = new DatabaseService();
+            DatabaseService.createConnection();
+            gamelist = DatabaseService.executeProcedureSelect<Game>("DaneGier"); // co to znaczy "SelectAllGames"?????????????????
 
+            dataGridGames.ItemsSource = gamelist;
 
-            string connectionString = "Server= localhost\\SQLEXPRESS; Database= Gry; Integrated Security = SSPI";
-            SqlConnection connection = new SqlConnection(connectionString);
+            //string connectionString = "Server= localhost\\SQLEXPRESS; Database= Gry; Integrated Security = SSPI";
+            //SqlConnection connection = new SqlConnection(connectionString);
 
-            SqlCommand command = new SqlCommand("DaneGier", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            //SqlCommand command = new SqlCommand("DaneGier", connection);
+            //command.CommandType = CommandType.StoredProcedure;
 
-            SqlDataAdapter sda = new SqlDataAdapter(command);
-            DataTable dataTable = new DataTable();
-            sda.Fill(dataTable);
+            //SqlDataAdapter sda = new SqlDataAdapter(command);
+            //DataTable dataTable = new DataTable();
+            //sda.Fill(dataTable);
 
-            foreach (DataRow row in dataTable.Rows)
-            {
-                Gry gry = new Gry();
-                gry.releaseDate = (int)row["Release_Date"];
-                gry.projectName = (string)row["Project_Name"];
-                gry.companyName = (string)row["Company_Name"];
-                listaGier.Add(gry);
-            }
+            //foreach (DataRow row in dataTable.Rows)
+            //{
+                //Gry gry = new Gry();
+                //gry.releaseDate = (int)row["Release_Date"];
+                //gry.projectName = (string)row["Project_Name"];
+                //gry.companyName = (string)row["Company_Name"];
+                //listaGier.Add(gry);
+            //}
 
             /*listaGier.Add(new Gry(2015, "The Witcher 3: Wild Hunt", "CD Project Red"));
             listaGier.Add(new Gry(2013, "GTA 5", "Rockstar games"));
@@ -58,7 +65,7 @@ namespace Lista3_ProjektOGrachKomputerowych
             listaGier.Add(new Gry(2015, "The Witcher 3: Wild Hunt", "CD Project Red"));
             listaGier.Add(new Gry(2013, "GTA 5", "Rockstar games"));
             listaGier.Add(new Gry(2014, "Hearthstone", "Blizzard Entertainment"));*/
-            dataGridGames.ItemsSource = listaGier;
+            //dataGridGames.ItemsSource = listaGier;
             /*DataGridColumn first = dataGridGames.Columns[0];
             first.Width = 10; */
 
@@ -73,20 +80,46 @@ namespace Lista3_ProjektOGrachKomputerowych
             */
         }
 
-        private void AddGame_Button(object sender, RoutedEventArgs e)
+        private void Button(object sender, RoutedEventArgs e)
         {
-            AddGame addGame = new AddGame();
-            Gry gra = new Gry();
-            addGame.DataContext = gra;
-            addGame.ShowDialog();
-            if (addGame.confirm)
+            //AddGame addGame = new AddGame();
+            //Gry gra = new Gry();
+            //addGame.DataContext = gra;
+            //addGame.ShowDialog();
+            //if (addGame.confirm)
+            //{
+            //listaGier.Add(gra);
+            //dataGridGames.Items.Refresh();
+            //}
+            Button button = sender as Button;
+
+            if (!button.Name.StartsWith("Add"))
             {
-                listaGier.Add(gra);
-                dataGridGames.Items.Refresh();
+                this.gra = (Game)dataGridGames.SelectedItem;
+                if (gra == null)
+                    return;
             }
+            else
+            {
+                this.gra = new Game();
+            }
+
+            AddGame addGameWinn = new AddGame(this, button.Name);
+            addGameWinn.Show();
         }
 
-        private void DeleteGame_Button(object sender, RoutedEventArgs e)
+        public void addItemToGameList()
+        {
+            gamelist.Add(this.gra);
+        }
+
+        public void removeItemFromGameList()
+        {
+            gamelist.Remove(this.gra);
+        }
+
+
+        /*private void DeleteGame_Button(object sender, RoutedEventArgs e)
         {
             if (dataGridGames.SelectedItem != null)
             {
@@ -94,7 +127,7 @@ namespace Lista3_ProjektOGrachKomputerowych
                 listaGier.RemoveAt(index);
                 dataGridGames.Items.Refresh();
             }
-        }
+        }*/
 
         private void SaveList_Button(object sender, RoutedEventArgs e)
         {
@@ -102,7 +135,7 @@ namespace Lista3_ProjektOGrachKomputerowych
 
             using (Stream s = File.Create("C:/GameList.xml")) 
             {
-                xs.Serialize(s, listaGier);
+                xs.Serialize(s, gamelist);
             }
             MessageBox.Show("List was saved.");
         }
@@ -113,13 +146,13 @@ namespace Lista3_ProjektOGrachKomputerowych
             //using (Stream s = File.OpenRead("C:/Games + Programs/Studia/GameList.xml"))
             using (Stream s = File.OpenRead("C:/GameList.xml"))
             {
-                listaGier = (List<Gry>)xs.Deserialize(s);
+                //gamelist = (List<Gry>)xs.Deserialize(s); ????????????????
             }
             MessageBox.Show("List was loaded.");
-            dataGridGames.ItemsSource = listaGier;
+            dataGridGames.ItemsSource = gamelist;
         }
 
-        private void Change_Button(object sender, RoutedEventArgs e)
+        /*private void Change_Button(object sender, RoutedEventArgs e)
         {
             if (dataGridGames.SelectedItem != null)
             {
@@ -135,7 +168,7 @@ namespace Lista3_ProjektOGrachKomputerowych
                 }
             }
         }
-
+        */
         private void Refresh_button(object sender, RoutedEventArgs e)
         {
             dataGridGames.Items.Refresh();

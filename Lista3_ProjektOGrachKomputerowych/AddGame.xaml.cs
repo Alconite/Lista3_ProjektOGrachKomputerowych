@@ -12,16 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using Lista3_ProjektOGrachKomputerowych.model;
+
 
 namespace Lista3_ProjektOGrachKomputerowych
 {
-    /// <summary>
-    /// Logika interakcji dla klasy AddGame.xaml
-    /// </summary>
+
     public partial class AddGame : Window
     {
-        public bool confirm { get; set; }
+        private MainWindow MainWindow;
+        private DatabaseService DatabaseService;
+        private string Mode;
+
+        //public bool confirm { get; set; }
         int i = 0;
+
         public AddGame()
         {
             InitializeComponent();
@@ -30,9 +35,32 @@ namespace Lista3_ProjektOGrachKomputerowych
             company.Text = "Company Name";
         }
 
-        private void Confirm_Button_Click(object sender, RoutedEventArgs e)
+        public AddGame(MainWindow window, string mode)
         {
-            int num = 0;
+
+            this.MainWindow = window;
+            this.DataContext = this.MainWindow.gra;
+            this.Mode = mode;
+            InitializeComponent();
+
+            this.DatabaseService = new DatabaseService();
+
+            if (this.Mode.StartsWith("Delete"))
+            {
+                Confirm_Button.Visibility = Visibility.Hidden;
+                year.IsReadOnly = true;
+                project.IsReadOnly = true;
+                company.IsReadOnly = true;
+            }
+            else
+            {
+                Delete_Button.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            /*int num = 0;
             if (int.TryParse(year.Text, out num) && project.Text != "" && company.Text != "")
             {
                 confirm = true;
@@ -44,14 +72,32 @@ namespace Lista3_ProjektOGrachKomputerowych
                 year.Text = "";
                 project.Text = "";
                 company.Text = "";
+            }*/
+
+            this.DatabaseService.createConnection();
+            if (this.Mode.StartsWith("add"))
+            {
+                this.MainWindow.addItemToGameList();
+                this.MainWindow.gra.Release_Date = this.DatabaseService.executeProcedureModify<Game>("ModifyGame", "Insert", this.MainWindow.gra);
             }
+            else if (this.Mode.StartsWith("change"))
+            {
+                this.DatabaseService.executeProcedureModify<Game>("ModifyGame", "Update", this.MainWindow.gra);
+            }
+            else if (this.Mode.StartsWith("delete"))
+            {
+                this.MainWindow.removeItemFromGameList();
+                this.DatabaseService.executeProcedureModify<Game>("ModifyGame", "Delete", this.MainWindow.gra);
+            }
+
+            this.Close();
         }
 
-        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
+       /* private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             confirm = false;
             this.Close();
-        }
+        }*/
 
         private void year_GotFocus(object sender, RoutedEventArgs e)
         {
