@@ -93,7 +93,7 @@ namespace Lista3_ProjektOGrachKomputerowych
             //}
             Button button = sender as Button;
 
-            if (!button.Name.StartsWith("Add"))
+            if (!button.Name.StartsWith("add"))
             {
                 this.gra = (Game)dataGridGames.SelectedItem;
                 if (gra == null)

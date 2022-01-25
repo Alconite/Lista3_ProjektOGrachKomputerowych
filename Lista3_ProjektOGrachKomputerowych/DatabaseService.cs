@@ -60,17 +60,18 @@ namespace Lista3_ProjektOGrachKomputerowych
 
                 Command.Parameters.Add(new SqlParameter("@mode", SqlDbType.VarChar)).Value = mode;
 
-                Command.Parameters.Add("@Release_Date", SqlDbType.Int).Direction = ParameterDirection.Output;
+                //Command.Parameters.Add("@Release_Date", SqlDbType.Int).Direction = ParameterDirection.Output;
                 Connection.Open();
-                Command.ExecuteNonQuery();
-                if (mode == "Insert")
-                    Release_Date = (int)Command.Parameters["@Release_Date"].Value;
+                
+                //if (mode == "Insert")
+                //    Release_Date = (int)Command.Parameters["@Release_Date"].Value;
                 
                 foreach (PropertyInfo propertyInfo in type.GetProperties())
                 {
                     if (!propertyInfo.Name.StartsWith("x"))
                         Command.Parameters.Add(new SqlParameter("@" + propertyInfo.Name, SqlDbType.VarChar)).Value = propertyInfo.GetValue(item);
                 }
+                Command.ExecuteNonQuery();
                 Connection.Close();
             }
             catch (InvalidOperationException ex)
