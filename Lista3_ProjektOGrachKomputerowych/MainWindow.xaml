@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:BoldReports="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
         xmlns:local="clr-namespace:Lista3_ProjektOGrachKomputerowych"
         mc:Ignorable="d"
         Title="Games Showcase" Height="450" Width="800">
@@ -35,19 +36,13 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <!--DataGrid x:Name="dataGridGames" Width="400" Height="130" BorderBrush="Black" CanUserAddRows="False" ColumnWidth="*" Margin="382,69,10,220">
-
-
-
-        </-->
-
         <Canvas>
             <Button Name="add_button" Content="Add new game" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="10" Click="Button"/>
             <Button Name="delete_button" Content="Delete game" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="10" Click="Button"/>
             <Button Visibility="Hidden" Content="Save list" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Left="10" Click="SaveList_Button"/>
             <Button Visibility="Hidden" Content="Load list" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Left="10" Click="LoadList_Button"/>
             <Button Name="change_button" Content="Change" Width="105" Height="40" FontSize="15" Canvas.Bottom="20" Canvas.Right="125" Click="Button"/>
-            <Button Content="Refresh" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="125" Click="Refresh_button"/>
+            <Button Content="Report" Width="105" Height="40" FontSize="15" Canvas.Bottom="70" Canvas.Right="125" Click="Report_button"/>
             <ListView Name="dataGridGames" Grid.Row="1" Grid.Column="0" Canvas.Left="183" Canvas.Top="108">
                 <ListView.View>
                     <GridView>

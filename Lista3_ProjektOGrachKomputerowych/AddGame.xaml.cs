@@ -60,19 +60,7 @@ namespace Lista3_ProjektOGrachKomputerowych
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*int num = 0;
-            if (int.TryParse(year.Text, out num) && project.Text != "" && company.Text != "")
-            {
-                confirm = true;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Wrong data, try again.");
-                year.Text = "";
-                project.Text = "";
-                company.Text = "";
-            }*/
+            
 
             this.DatabaseService.createConnection();
             if (this.Mode.StartsWith("add"))

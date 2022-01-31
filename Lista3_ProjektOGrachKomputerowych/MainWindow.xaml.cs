@@ -19,6 +19,9 @@ using System.Xml.Serialization;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.Reporting;
+using Microsoft.ReportingServices;
+using Microsoft.Reporting.WinForms;
 using Lista3_ProjektOGrachKomputerowych.model;
 
 
@@ -27,7 +30,6 @@ namespace Lista3_ProjektOGrachKomputerowych
 
     public partial class MainWindow : Window
     {
-        //List<Gry> listaGier = new List<Gry>();
         public ObservableCollection<Game> gamelist { get; }
         public Game gra { get; set; }
 
@@ -36,7 +38,7 @@ namespace Lista3_ProjektOGrachKomputerowych
             InitializeComponent();
             DatabaseService DatabaseService = new DatabaseService();
             DatabaseService.createConnection();
-            gamelist = DatabaseService.executeProcedureSelect<Game>("DaneGier"); // co to znaczy "SelectAllGames"?????????????????
+            gamelist = DatabaseService.executeProcedureSelect<Game>("DaneGier"); 
 
             dataGridGames.ItemsSource = gamelist;
 
@@ -169,9 +171,11 @@ namespace Lista3_ProjektOGrachKomputerowych
             }
         }
         */
-        private void Refresh_button(object sender, RoutedEventArgs e)
+        private void Report_button(object sender, RoutedEventArgs e)
         {
-            dataGridGames.Items.Refresh();
+            
+            ReportShow rps = new ReportShow();
+            rps.Show();
         }
     }
 }
